@@ -1,6 +1,6 @@
-// Saved progress for the Leonida trophy guide: a set of earned trophy names
-// kept in localStorage, exportable to a JSON file and importable back.
-export const STORAGE_KEY = 'leonida-trophy-guide-earned-v1';
+// The case file's evidence locker: a set of earned trophy names kept in
+// localStorage, exportable to a JSON file and importable back.
+export const STORAGE_KEY = 'leonida-case-file-earned-v1';
 
 export function loadEarned() {
   try {
@@ -19,7 +19,7 @@ export function saveEarned(earned) {
 
 export function exportEarned(earned, total) {
   const payload = {
-    app: 'Leonida Trophy Guide — GTA VI (PS5)',
+    app: 'Leonida Case File — GTA VI (PS5)',
     exportedAt: new Date().toISOString(),
     earned: [...earned].sort(),
     total,
@@ -39,6 +39,6 @@ export async function importEarnedFile(file, knownNames) {
   if (!Array.isArray(names)) throw new Error('That file does not hold a list of earned trophies.');
   const known = new Set(knownNames);
   const kept = names.filter((name) => typeof name === 'string' && known.has(name));
-  if (kept.length === 0) throw new Error('No trophy names in that file match this guide.');
+  if (kept.length === 0) throw new Error('No trophy names in that file match this case file.');
   return new Set(kept);
 }
