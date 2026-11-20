@@ -1,11 +1,12 @@
-// Leonida Trophy Guide — the entrypoint (Node 22, standard library only).
+// Leonida Case File — the entrypoint (Node 22, standard library only).
 // The guide itself is plain static files in app/ (index.html, CSS, ES modules,
-// and data/trophies.json with the 55 official trophies and their guides), and
-// screenshots/ holds four real renders of it. This program hands the entry
-// in: it copies app/ and screenshots/ from beside this file to /output and
-// writes /output/dossier.json, the summary the judge reads, with the vendored
-// make.fun library. Leave vendor/makefun-frontend.ts as it is: the scorer
-// requires dossier.json to be byte for byte what its own copy writes.
+// and data/trophies.json with the 55 official trophies and their field
+// reports), and screenshots/ holds four real renders of it. This program
+// hands the entry in: it copies app/ and screenshots/ from beside this file
+// to /output and writes /output/dossier.json, the summary the judge reads,
+// with the vendored make.fun library. Leave vendor/makefun-frontend.ts as it
+// is: the scorer requires dossier.json to be byte for byte what its own
+// copy writes.
 //
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
@@ -29,7 +30,12 @@ function checkTrophyData() {
   if (missing.length > 0) {
     throw new Error(`${missing.length} trophies have no guide: ${missing.map((t) => t.name).join(', ')}`);
   }
-  console.log(`trophy data ok: ${trophies.length} trophies, every one with a guide`);
+  const ids = trophies.map((t) => t.id);
+  const sorted = [...ids].sort((a, b) => a - b);
+  if (JSON.stringify(ids) !== JSON.stringify(sorted)) {
+    throw new Error('trophies.json must list the trophies in id order, 1 to 55');
+  }
+  console.log(`trophy data ok: ${trophies.length} trophies in id order, every one with a guide`);
 }
 
 function countFiles(dir) {
