@@ -1,6 +1,7 @@
-// Leonida Trophy Guide — bootstrap: loads the trophy list and the roadmap,
-// wires the checklist, the detail panel, the filters and the spoiler setting,
-// and reads the page state from the URL hash so any view can be linked to.
+// Leonida Case File — bootstrap: loads the trophy list and the operation
+// plan, wires the evidence log, the field report, the filter desk and the
+// spoiler setting, and reads the page state from the URL hash so any view
+// can be linked to.
 import { loadEarned, saveEarned, exportEarned, importEarnedFile } from './store.js';
 import { KIND_LABELS, KIND_FILTERS, renderTrophyList } from './list.js';
 import { renderTrophyDetail } from './detail.js';
@@ -59,23 +60,6 @@ function renderProgress() {
     `Platinum ${byGrade.platinum}/1 · Gold ${byGrade.gold}/2 · Silver ${byGrade.silver}/6 · Bronze ${byGrade.bronze}/46`;
 }
 
-function renderFacts() {
-  const facts = document.getElementById('facts');
-  for (const fact of [
-    '55 trophies',
-    '1 platinum · 2 gold · 6 silver · 46 bronze',
-    '28 hidden until earned',
-    'About 200 hours to platinum',
-    '1 playthrough',
-    '0 online trophies',
-    'No mission replay',
-  ]) {
-    const item = document.createElement('li');
-    item.textContent = fact;
-    facts.append(item);
-  }
-}
-
 function renderChips() {
   chipsEl.replaceChildren();
   for (const kind of KIND_FILTERS) {
@@ -129,15 +113,14 @@ async function loadData() {
 
 async function boot() {
   await loadData();
-  renderFacts();
   applyHash();
   renderAll();
   renderRoadmap(document.getElementById('roadmap'), roadmap, trophiesById, selectTrophy);
   renderMissables(document.getElementById('missables'), roadmap, trophiesById, selectTrophy);
 
   // Deep links scroll only once the whole page is rendered, so the target
-  // is at its final position: a trophy link shows its guide, a view link
-  // shows that section.
+  // is at its final position: a trophy link opens its field report, a view
+  // link shows that section.
   const hash = readHash();
   if (state.selectedId) {
     detailEl.scrollIntoView();
