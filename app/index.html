@@ -3,72 +3,90 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leonida Trophy Guide — GTA VI (PS5)</title>
+<title>Leonida Case File — GTA VI Trophy Dossier (PS5)</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero">
-  <p class="eyebrow">Grand Theft Auto VI · PlayStation 5 · Offline guide &amp; tracker</p>
-  <h1>Leonida Trophy Guide</h1>
-  <p class="lede">Every one of the 55 trophies, with a guide in our own words, a checklist that saves in your browser, a roadmap to the platinum, and the one trophy you can miss.</p>
-  <ul class="facts" id="facts"></ul>
+<header class="masthead">
+  <div class="masthead-top">
+    <p class="file-no">CASE FILE Nº 055 · LEONIDA COUNTY · OPENED 19 NOV 2026</p>
+    <p class="case-stamp" aria-label="Case status: open">OPEN CASE</p>
+  </div>
+  <h1>The Leonida Case File</h1>
+  <p class="case-sub">Grand Theft Auto VI · PlayStation 5 · Every trophy, investigated — with the evidence cited, the progress filed, and the one trophy that can slip away flagged in red.</p>
+  <dl class="meta-table">
+    <div><dt>Subject</dt><dd>Grand Theft Auto VI</dd></div>
+    <div><dt>Platform</dt><dd>PlayStation 5</dd></div>
+    <div><dt>Exhibits</dt><dd>55 trophies</dd></div>
+    <div><dt>Breakdown</dt><dd>1 platinum · 2 gold · 6 silver · 46 bronze</dd></div>
+    <div><dt>Concealed</dt><dd>28 hidden until earned</dd></div>
+    <div><dt>Time on file</dt><dd>About 200 hours to platinum</dd></div>
+    <div><dt>Playthroughs</dt><dd>1 · no mission replay</dd></div>
+    <div><dt>Online</dt><dd>0 online trophies</dd></div>
+  </dl>
 </header>
 
-<section class="progress" aria-label="Progress">
-  <div class="progress-head">
+<section class="progress-strip" aria-label="Progress">
+  <div class="progress-count">
+    <span class="progress-label">CASE PROGRESS</span>
     <strong id="progressText">0 of 55 earned</strong>
     <span id="progressGrades"></span>
-    <button id="resetProgress" type="button" class="ghost">Reset progress</button>
   </div>
-  <div class="bar"><div id="progressFill" class="fill" style="width:0%"></div></div>
+  <div class="bar" role="progressbar" aria-label="Trophies earned"><div id="progressFill" class="fill" style="width:0%"></div></div>
+  <button id="resetProgress" type="button" class="ghost">Clear the file</button>
 </section>
 
-<nav class="controls" aria-label="Filters and tools">
-  <input id="search" type="search" placeholder="Search trophies, missions, places…" aria-label="Search trophies">
-  <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
-  <label class="field">Grade
-    <select id="gradeFilter">
-      <option value="all">All grades</option>
-      <option value="platinum">Platinum</option>
-      <option value="gold">Gold</option>
-      <option value="silver">Silver</option>
-      <option value="bronze">Bronze</option>
-    </select>
-  </label>
-  <label class="toggle"><input id="spoilerToggle" type="checkbox" checked> Hide story spoilers</label>
-  <button id="exportBtn" type="button">Export progress</button>
-  <label class="importBtn">Import progress <input id="importFile" type="file" accept="application/json,.json"></label>
-</nav>
+<main class="case-grid">
+  <nav class="filter-desk" aria-label="Filters and tools">
+    <h2>Filter Desk</h2>
+    <label class="search-label" for="search">Search the file</label>
+    <input id="search" type="search" placeholder="Trophy, mission, place…" aria-label="Search trophies">
+    <p class="desk-caption">By kind</p>
+    <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
+    <label class="field">Grade
+      <select id="gradeFilter">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </label>
+    <label class="toggle"><input id="spoilerToggle" type="checkbox" checked> Hide story spoilers</label>
+    <button id="exportBtn" type="button">Export progress</button>
+    <label class="importBtn">Import progress <input id="importFile" type="file" accept="application/json,.json"></label>
+    <p class="desk-note">Your ticks save in this browser only. Export a copy before you switch devices.</p>
+  </nav>
 
-<main class="layout">
-  <section class="list-col" aria-label="Trophy checklist">
-    <h2 id="listHeading">Checklist <span id="listCount"></span></h2>
-    <p class="hint">Tick a trophy when you earn it. Click any card to read its guide and sources.</p>
-    <div id="trophyList" class="cards"></div>
+  <section class="log-col" aria-label="Trophy evidence log">
+    <h2 id="listHeading">Evidence Log <span id="listCount"></span></h2>
+    <p class="hint">Tick a trophy when you earn it. Click any entry to open its field report, with the sources on file.</p>
+    <div id="trophyList" class="log"></div>
   </section>
-  <aside class="detail-col" aria-label="Trophy guide">
-    <div id="detail" class="detail"></div>
+
+  <aside class="report-col" aria-label="Trophy field report">
+    <div id="detail" class="report"></div>
   </aside>
 </main>
 
-<section id="roadmap" class="roadmap" aria-label="Roadmap to the platinum">
-  <h2 id="roadmapTitle">Roadmap to the platinum</h2>
+<section id="roadmap" class="plan" aria-label="Operation plan">
+  <h2 id="roadmapTitle">Operation Plan — the road to platinum</h2>
   <p id="roadmapIntro" class="lede"></p>
-  <div id="roadmapStages" class="stages"></div>
+  <div id="roadmapStages" class="stage-files"></div>
   <p class="sources-line" id="roadmapSources"></p>
 </section>
 
-<section id="missables" class="missables" aria-label="Missable trophies">
-  <h2 id="missableTitle">Missable trophies</h2>
+<section id="missables" class="red-flags" aria-label="Red flags: missable trophies">
+  <h2 id="missableTitle">Red Flags — missable trophies</h2>
   <p id="missableText" class="lede"></p>
-  <div id="missableCards" class="miss-cards"></div>
+  <div id="missableCards" class="flag-cards"></div>
   <h3>Watch out for these too</h3>
   <ul id="watchOuts"></ul>
 </section>
 
 <footer>
-  <p>Guides are written in our own words for this guide. Each trophy cites the public guide its facts draw on — a source is cited, never copied. Official trophy names, descriptions and grades are shown as PlayStation publishes them.</p>
-  <p>This guide works fully offline: it loads nothing from the network, and your checklist never leaves your browser except when you export it.</p>
+  <p>Every field report is written in our own words for this file. Each trophy names the public guide its facts draw on — a source is cited, never copied. Official trophy names, descriptions and grades are shown as PlayStation publishes them.</p>
+  <p>This file works fully offline: it loads nothing from the network, and your checklist never leaves your browser except when you export it.</p>
 </footer>
 
 <script type="module" src="app.js"></script>
