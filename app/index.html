@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Trophy Guide — GTA VI (PS5)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <p class="eyebrow">Grand Theft Auto VI · PlayStation 5 · Offline guide &amp; tracker</p>
+  <h1>Leonida Trophy Guide</h1>
+  <p class="lede">Every one of the 55 trophies, with a guide in our own words, a checklist that saves in your browser, a roadmap to the platinum, and the one trophy you can miss.</p>
+  <ul class="facts" id="facts"></ul>
+</header>
+
+<section class="progress" aria-label="Progress">
+  <div class="progress-head">
+    <strong id="progressText">0 of 55 earned</strong>
+    <span id="progressGrades"></span>
+    <button id="resetProgress" type="button" class="ghost">Reset progress</button>
+  </div>
+  <div class="bar"><div id="progressFill" class="fill" style="width:0%"></div></div>
+</section>
+
+<nav class="controls" aria-label="Filters and tools">
+  <input id="search" type="search" placeholder="Search trophies, missions, places…" aria-label="Search trophies">
+  <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
+  <label class="field">Grade
+    <select id="gradeFilter">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="toggle"><input id="spoilerToggle" type="checkbox" checked> Hide story spoilers</label>
+  <button id="exportBtn" type="button">Export progress</button>
+  <label class="importBtn">Import progress <input id="importFile" type="file" accept="application/json,.json"></label>
+</nav>
+
+<main class="layout">
+  <section class="list-col" aria-label="Trophy checklist">
+    <h2 id="listHeading">Checklist <span id="listCount"></span></h2>
+    <p class="hint">Tick a trophy when you earn it. Click any card to read its guide and sources.</p>
+    <div id="trophyList" class="cards"></div>
+  </section>
+  <aside class="detail-col" aria-label="Trophy guide">
+    <div id="detail" class="detail"></div>
+  </aside>
+</main>
+
+<section id="roadmap" class="roadmap" aria-label="Roadmap to the platinum">
+  <h2 id="roadmapTitle">Roadmap to the platinum</h2>
+  <p id="roadmapIntro" class="lede"></p>
+  <div id="roadmapStages" class="stages"></div>
+  <p class="sources-line" id="roadmapSources"></p>
+</section>
+
+<section id="missables" class="missables" aria-label="Missable trophies">
+  <h2 id="missableTitle">Missable trophies</h2>
+  <p id="missableText" class="lede"></p>
+  <div id="missableCards" class="miss-cards"></div>
+  <h3>Watch out for these too</h3>
+  <ul id="watchOuts"></ul>
+</section>
+
+<footer>
+  <p>Guides are written in our own words for this guide. Each trophy cites the public guide its facts draw on — a source is cited, never copied. Official trophy names, descriptions and grades are shown as PlayStation publishes them.</p>
+  <p>This guide works fully offline: it loads nothing from the network, and your checklist never leaves your browser except when you export it.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
