@@ -1,4 +1,4 @@
-// The roadmap to the platinum and the missable-trophy warnings, rendered
+// The operation plan to the platinum and the red-flag warnings, rendered
 // from the roadmap data file and the trophy list.
 function sourceLink(source) {
   const item = document.createElement('li');
@@ -20,7 +20,7 @@ export function renderRoadmap(section, roadmap, trophiesById, onSelectTrophy) {
   stages.replaceChildren();
   for (const stage of roadmap.stages) {
     const card = document.createElement('div');
-    card.className = 'stage';
+    card.className = 'stage-file';
     const heading = document.createElement('h3');
     heading.textContent = `Stage ${stage.stage} — ${stage.title}`;
     card.append(heading);
@@ -52,7 +52,7 @@ export function renderRoadmap(section, roadmap, trophiesById, onSelectTrophy) {
   }
   const sources = document.getElementById('roadmapSources');
   sources.replaceChildren();
-  sources.append(document.createTextNode('Roadmap sources: '));
+  sources.append(document.createTextNode('Plan sources: '));
   for (const source of roadmap.sources ?? []) {
     sources.append(sourceLink(source));
     sources.append(document.createTextNode(' '));
@@ -70,16 +70,16 @@ export function renderMissables(section, roadmap, trophiesById, onSelectTrophy) 
     const trophy = trophiesById.get(entry.trophy_id);
     if (!trophy) continue;
     const card = document.createElement('div');
-    card.className = 'miss-card';
+    card.className = 'flag-card';
     const heading = document.createElement('h3');
-    heading.textContent = `⚠ ${trophy.name} — the one trophy you can miss`;
+    heading.textContent = `⚠ RED FLAG — ${trophy.name}`;
     card.append(heading);
     const warning = document.createElement('p');
     warning.textContent = entry.warning;
     card.append(warning);
     const link = document.createElement('a');
     link.href = `#trophy=${trophy.id}`;
-    link.textContent = 'Read its full guide';
+    link.textContent = 'Read its full field report';
     link.addEventListener('click', (event) => {
       event.preventDefault();
       onSelectTrophy(trophy);
