@@ -1,4 +1,4 @@
-// The trophy checklist: one card per trophy, with filters, search and the
+// The evidence log: one ruled card per trophy, with filters, search and the
 // spoiler setting that hides story trophies until they are earned.
 export const KIND_LABELS = {
   story: 'Story',
@@ -13,11 +13,11 @@ export const KIND_LABELS = {
 
 export const KIND_FILTERS = ['all', 'story', 'side', 'missable', 'collectibles', 'activities', 'robbery', 'exploration'];
 
-export function gradeBadge(grade) {
-  const badge = document.createElement('span');
-  badge.className = `badge ${grade}`;
-  badge.textContent = grade;
-  return badge;
+export function gradeStamp(grade) {
+  const stamp = document.createElement('span');
+  stamp.className = `grade-stamp ${grade}`;
+  stamp.textContent = grade;
+  return stamp;
 }
 
 export function isSpoilerHidden(trophy, spoilersOn, earned) {
@@ -38,13 +38,13 @@ export function trophyMatches(trophy, kindFilter, gradeFilter, query) {
   return true;
 }
 
-export function buildTrophyCard(trophy, state, onToggle, onSelect) {
+export function buildLogRow(trophy, state, onToggle, onSelect) {
   const { earned, spoilersOn, selectedId } = state;
   const hidden = isSpoilerHidden(trophy, spoilersOn, earned);
-  const card = document.createElement('article');
-  card.className = 'card';
-  if (earned.has(trophy.name)) card.classList.add('earned');
-  if (selectedId === trophy.id) card.classList.add('selected');
+  const row = document.createElement('article');
+  row.className = 'log-row';
+  if (earned.has(trophy.name)) row.classList.add('earned');
+  if (selectedId === trophy.id) row.classList.add('selected');
 
   const box = document.createElement('input');
   box.type = 'checkbox';
@@ -54,7 +54,7 @@ export function buildTrophyCard(trophy, state, onToggle, onSelect) {
     event.stopPropagation();
     onToggle(trophy);
   });
-  card.append(box);
+  row.append(box);
 
   const body = document.createElement('div');
   const title = document.createElement('h3');
@@ -67,36 +67,36 @@ export function buildTrophyCard(trophy, state, onToggle, onSelect) {
   if (!hidden && trophy.target) {
     const target = document.createElement('p');
     target.className = 'target';
-    target.textContent = trophy.target;
+    target.textContent = `▸ ${trophy.target}`;
     body.append(target);
   }
-  card.append(body);
+  row.append(body);
 
   const meta = document.createElement('div');
   meta.className = 'meta';
-  meta.append(gradeBadge(trophy.grade));
+  meta.append(gradeStamp(trophy.grade));
   if (trophy.missable) {
     const flag = document.createElement('span');
-    flag.className = 'flag missable';
+    flag.className = 'stamp-flag missable';
     flag.textContent = 'Missable';
     meta.append(flag);
   }
   if (trophy.hidden) {
     const flag = document.createElement('span');
-    flag.className = 'flag hidden';
+    flag.className = 'stamp-flag hidden';
     flag.textContent = 'Hidden';
     meta.append(flag);
   }
   if (trophy.status === 'unconfirmed') {
     const flag = document.createElement('span');
-    flag.className = 'flag unconfirmed';
+    flag.className = 'stamp-flag unconfirmed';
     flag.textContent = 'Unconfirmed';
     meta.append(flag);
   }
-  card.append(meta);
+  row.append(meta);
 
-  card.addEventListener('click', () => onSelect(trophy));
-  return card;
+  row.addEventListener('click', () => onSelect(trophy));
+  return row;
 }
 
 export function renderTrophyList(container, trophies, state, onToggle, onSelect) {
@@ -105,9 +105,9 @@ export function renderTrophyList(container, trophies, state, onToggle, onSelect)
   if (shown.length === 0) {
     const empty = document.createElement('p');
     empty.className = 'empty-list';
-    empty.textContent = 'No trophies match those filters. Clear the search or pick another kind.';
+    empty.textContent = 'No entries match those filters. Clear the search or pick another kind.';
     container.append(empty);
   }
-  for (const trophy of shown) container.append(buildTrophyCard(trophy, state, onToggle, onSelect));
+  for (const trophy of shown) container.append(buildLogRow(trophy, state, onToggle, onSelect));
   return shown.length;
 }
